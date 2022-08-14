@@ -15,4 +15,6 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/posts', [PostController::class, 'index']);
+Route::get('/post-create', [PostController::class, 'create']);
+Route::post('/post-create', [PostController::class, 'store']);
 

@@ -12,4 +12,18 @@ class PostController extends Controller
         $posts = Post::all();
         return view('posts.list', ['posts' => $posts]);
     }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $post = new Post();
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->save();
+        return redirect('/posts');
+    }
 }
