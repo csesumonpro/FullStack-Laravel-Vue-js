@@ -14,7 +14,15 @@ use App\Http\Controllers\PostController;
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('/posts', [PostController::class, 'index']);
+
 Route::get('/post-create', [PostController::class, 'create']);
 Route::post('/post-create', [PostController::class, 'store']);
+
+Route::get('/edit-post/{id}', [PostController::class, 'edit']);
+Route::post('/post-update/', [PostController::class, 'update']);
 

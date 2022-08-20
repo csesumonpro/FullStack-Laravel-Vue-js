@@ -26,4 +26,19 @@ class PostController extends Controller
         $post->save();
         return redirect('/posts');
     }
+
+    public function edit($post_id)
+    {
+        $post = Post::where('id', $post_id)->first();
+        return view('posts.update', ['post' => $post]);
+    }
+
+    public function update(Request $request)
+    {
+        $post = Post::find($request->id);
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->save();
+        return redirect('/posts');
+    }
 }

@@ -10,7 +10,7 @@
 
    <ul>
          @foreach($posts as $post)
-              <li>{{ $post->title }}</li>
+              <li>{{ $post->title }} | <a href="/edit-post/{{$post->id}}">Edit</a></li>
          @endforeach
    </ul>
 </body>
