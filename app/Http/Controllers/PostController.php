@@ -20,6 +20,10 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+        ]);
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
@@ -35,6 +39,10 @@ class PostController extends Controller
 
     public function update(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'description' => 'required',
+        ]);
         $post = Post::find($request->id);
         $post->title = $request->title;
         $post->description = $request->description;

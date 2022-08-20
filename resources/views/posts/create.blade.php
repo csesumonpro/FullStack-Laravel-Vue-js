@@ -1,17 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/post-create" method="post">
+@extends('welcome')
+
+@section('content')
+<form action="/post-create" method="post">
     @csrf
-        <input type="text" name="title" placeholder="Title">
-        <textarea name="description"></textarea>
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <div class="form-group">
+    <label for="inputTitle">Title</label>
+    <input type="text" class="form-control" name="title" placeholder="Title">
+        
+            @error('title')
+            <div class="alert alert-warning" role="alert">
+                    {{ $message }}
+            </div>
+            @enderror
+
+    </div>
+    <div class="form-group">
+    <label for="inputBody">Body</label>
+    <textarea class="form-control" name="description" rows="3" placeholder="description"></textarea>
+        @error('description')
+            <div class="alert alert-warning" role="alert">
+                    {{ $message }}
+            </div>
+        @enderror
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+       
+</form>
+@endsection
+
+@section('title')
+Create Post
+@endsection
