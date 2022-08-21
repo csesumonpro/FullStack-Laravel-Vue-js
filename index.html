@@ -6,14 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@3"></script>
+    <style>
+        .red {
+            color: red;
+        }
+        .green {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     This is vue 3
     <div id="app">
         <h2>this is title </h2>
           {{name}}  
+          {{link}}  
+          <a href="https://google.com">Google</a>
+          <p v-html="link"></p>
+          <p v-if="x === 10">P tag</p>
+          <p v-else-if="x === 11">P tag from else</p>
+          <p v-else>else</p>
+          <p>
+            {{x === 10 ? 'x is equal 10' : 'empty'}}
+          </p>
+
+          <div class="section" :class="x === 11 ? 'red' : 'green'">
+                <p :style=" x>10 ? 'color:red': '' ">p tag</p>
+                <div @click="changeValue">
+                    Number {{x}}
+                </div>
+          </div>
+
     </div>
-    {{name}} outside
 </body>
 
 <script>
@@ -23,8 +47,15 @@
     {
         data() {
             return {
-                name: 'Jon Doe'
+                name: 'Jon Doe',
+                link: '<a href="https://google.com">Google</a>',
+                x:11
             }
+        },
+        methods: {
+            changeValue() {
+                this.x++;
+            },
         }
     }
    );
