@@ -19,7 +19,8 @@
     This is vue 3
     <div id="app">
         <h2>this is title </h2>
-          {{name}}  
+          Name: {{name}}  <br>
+          FullName: {{fullName}} <br>
           {{link}}  
           <a href="https://google.com">Google</a>
           <p v-html="link"></p>
@@ -32,30 +33,101 @@
 
           <div class="section" :class="x === 11 ? 'red' : 'green'">
                 <p :style=" x>10 ? 'color:red': '' ">p tag</p>
-                <div @click="changeValue">
+                <div @click="changeValue(20)">
                     Number {{x}}
                 </div>
           </div>
+          <div :style="styleObject">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo optio doloribus repudiandae adipisci id tempora nulla ducimus molestiae ex, quidem esse, suscipit laudantium dolores praesentium voluptatem provident dolorum aperiam ipsam?</p>
+          </div>
+          <div v-show="active">
+            Show
+          </div>
+          <ul>
+            <li v-for="abc in fruits">
+                {{abc}}
+            </li>
+            <li v-for="(value, index) in items">
+                {{value.message}}
+            </li>
+          </ul>
 
+          <input type="text" v-model="x" @keyup.shift.enter="changeInputValue">
+          <br>
+          <br>
+
+          <form action="">
+            Name : <input type="text" v-model="form.name"> <br>
+            Email : <input type="email" v-model="form.email"> <br>
+            Gender: 
+            <input type="radio"  value="male" v-model="form.gender" />
+            <label for="one">Male</label>
+            <input type="radio" id="two" value="female" v-model="form.gender" />
+            <label for="two">Female</label>
+            <br>
+            <button type="submit" @click.prevent="formSubmit">Submit</button>
+          </form>
     </div>
 </body>
 
 <script>
     const { createApp } = Vue;
-
-   const app =  createApp(
+    const app =  createApp(
     {
         data() {
             return {
+                active: false,
+                firstName: 'Jon', 
+                lastName: 'Doe',
                 name: 'Jon Doe',
                 link: '<a href="https://google.com">Google</a>',
-                x:11
+                x:11,
+                styleObject: {
+                    color: 'red',
+                    fontSize: '20px'
+                },
+                fruits: [
+                    'Apple',
+                    'Mango',
+                    "Banana"
+                ],
+                items: [
+                    { message: 'Foo' }, 
+                    { message: 'Bar' },
+                    { message: 'BarBar' },
+                ],
+                form :{
+                   name: '', 
+                   email: '', 
+                   gender: '', 
+                },
             }
         },
         methods: {
-            changeValue() {
-                this.x++;
+            changeValue(value) {
+                this.x+= value;
+                this.styleObject.color = 'black'
+                this.active = true
             },
+            changeInputValue() {
+                console.log(this.x)
+            },
+            formSubmit() {
+                console.log(this.form)
+            }
+        },
+        mounted() {
+            this.x = 12;
+        },
+        computed: {
+            fullName() {
+                return this.firstName+ ' '+this.lastName
+            }
+        },
+        watch: {
+            x(newVal, oldVal) {
+                console.log(newVal, oldVal)
+            }
         }
     }
    );
