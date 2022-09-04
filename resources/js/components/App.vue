@@ -1,8 +1,19 @@
 <template>
- <div>
-    <h1>Apps</h1>
-    <router-link to="/">Go to Home</router-link>
-    <router-link to="/about">Go to About</router-link>
-    <router-view></router-view>
- </div>
+    <div>
+        <Menu/>
+        <router-view></router-view>
+        <Copyright/>
+    </div>
 </template>
+
+<script>
+    import Menu from './fixed/Menu.vue'
+    import Copyright from './fixed/Copyright.vue'
+    export default {
+        name: 'App',
+        components: {
+            Menu,
+            Copyright
+        }
+    }
+</script>

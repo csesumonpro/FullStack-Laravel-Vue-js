@@ -11,7 +11,7 @@
 <link href="{{asset('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}" rel="stylesheet">
 <link href="{{asset('https://fonts.googleapis.com/css?family=Righteous')}}" rel="stylesheet">
 <!-- Custom styles for this template -->
-<!-- <link href="{{asset('assets/css/mediumish.css')}}" rel="stylesheet"> -->
+<link href="{{asset('assets/css/mediumish.css')}}" rel="stylesheet">
 </head>
 <body>
     <div id="app"></div>
