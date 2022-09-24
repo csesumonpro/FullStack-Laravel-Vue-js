@@ -50,6 +50,14 @@
           </a>
       </li>
           <li class="nav-item">
+              <a href="{{route('category.index')}}" class="nav-link">
+                  <i class="nav-icon fas fa-tags"></i>
+                  <p>
+                      Category
+                  </p>
+              </a>
+          </li>
+          <li class="nav-item">
               <a href="{{route('logout')}}" class="nav-link"
                  onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
