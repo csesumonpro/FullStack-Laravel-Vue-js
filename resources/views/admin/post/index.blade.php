@@ -7,9 +7,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Category List</h3>
+                                <h3 class="card-title">Post List</h3>
                                 <div class="card-tools">
-                                    <a href="{{route('category.create')}}" class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i></a>
+                                    <a href="{{route('post.create')}}" class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i></a>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -18,21 +18,28 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Image</th>
                                         <th>Name</th>
+                                        <th>Category</th>
+                                        <th>User</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                    @foreach($categories as $category)
+                                    @foreach($posts as $post)
+
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
-                                            <td>{{$category->name}}</td>
-                                            <td>{{$category->created_at}}</td>
+                                            <td><img src="{{asset('uploads/'.$post->image)}}" alt="" width="50"></td>
+                                            <td>{{$post->title}}</td>
+                                            <td>{{$post->category->name}}</td>
+                                            <td>{{$post->user->name}}</td>
+                                            <td>{{$post->created_at}}</td>
                                             <td>
-                                                <a href="{{route('category.edit', $category->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                                                <form action="{{route('category.destroy', $category->id)}}" method="POST" class="category-form">
+                                                <a href="{{route('post.edit', $post->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                                <form action="{{route('post.destroy', $post->id)}}" method="POST" class="post-form">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>

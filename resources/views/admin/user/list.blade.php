@@ -19,6 +19,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
+                                        <th>Email</th>
                                         <th>Date</th>
                                         <th>Action</th>
                                     </tr>
@@ -29,6 +30,7 @@
                                         <tr>
                                             <td>{{$loop->index+1}}</td>
                                             <td>{{$user->name}}</td>
+                                            <td>{{$user->email}}</td>
                                             <td>{{$user->created_at}}</td>
                                             <td>
                                                 <a href="{{route('user.edit', $user->id)}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
