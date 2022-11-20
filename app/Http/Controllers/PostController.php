@@ -38,11 +38,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-//        $request->validate([
-//            'title' => 'required',
-//            'description' => 'required',
-//            'category_id' => 'required',
-//        ]);
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required|min:10',
+            'category_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
         $file = $request->file('image');
         $post = new Post();
@@ -74,7 +75,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $post = Post::find($id);
+        return view('admin.post.edit', compact('categories', 'post'));
     }
 
     /**
@@ -86,7 +89,22 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3',
+            'content' => 'required|min:10',
+            'category_id' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $file = $request->file('image');
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->category_id = $request->category_id;
+        $post->user_id = auth()->user()->id;
+        $post->image = $this->fileUploader($file, $post->image);
+        $post->save();
+        return redirect()->route('post.index');
     }
 
     /**
@@ -98,17 +116,32 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
-        $post->delete();
+        $this->fileDelete($post->image);
         return redirect()->route('post.index');
     }
 
-    public function fileUploader($file)
+    public function fileUploader($file = null, $image = null)
     {
         if (!empty($file)) {
+            $this->fileDelete($image);
             $fileName = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads'), $fileName);
             return $fileName;
+
+        } else if ($image !== null) {
+            return $image;
+        } else {
+            return null;
         }
-        return null;
+    }
+
+    public function fileDelete($image)
+    {
+        if ($image !== null) {
+            $path = public_path('uploads/' . $image);
+            if (file_exists($path)) {
+                unlink($path);
+            }
+        }
     }
 }
