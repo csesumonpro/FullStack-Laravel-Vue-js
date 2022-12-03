@@ -7,4 +7,4 @@ const routes = [
     { path: '/post', component: Post },
   ];
 
- export default routes; 
+ export default routes;
