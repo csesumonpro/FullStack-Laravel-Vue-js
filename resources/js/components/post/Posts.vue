@@ -15,7 +15,7 @@
 			</a>
 			<div class="card-block">
 				<h2 class="card-title">
-                    <router-link to="/post">{{post.title}}</router-link>
+                    <router-link :to="{ name: 'post',  params: {id: post.id}}">{{post.title}}</router-link>
                 </h2>
                 <h4 class="card-text">{{post.content}}</h4>
                 <strong class="category">{{post.category.name}}</strong>
